@@ -16,6 +16,13 @@ var upgrader = websocket.Upgrader{}
 var tiles = []int8{0, 1, 2, 3, 4, 5, 6, 7, 8}
 
 func serverMark(w http.ResponseWriter, r *http.Request) {
+	upgrader.CheckOrigin = func(r *http.Request) bool {
+		if r.Host == "localhost:8080" {
+			return true
+		}
+		log.Println("host :", r.Host)
+		return false
+	}
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Println("upgrade (error):", err)
