@@ -8,6 +8,8 @@ window.addEventListener('DOMContentLoaded', () => {
   tiles.forEach((tile, index) => {
     tile.addEventListener('click', () => userMark(tile, index));
   })
+
+  websocket = new WebSocket("ws://localhost:8080/mark")
 })
 
 
